@@ -1,6 +1,8 @@
 # MCP79410RK
 *Particle library for MCP79410 real-time clock (RTC) chip with I2C interface*
 
+You can find the full browsable API docs [here](http://rickkas7.github.io/MCP79410RK/class_m_c_p79410.html).
+
 ## Hardware
 
 ![Sample Board](images/in-doubler.jpg) 
