@@ -545,6 +545,9 @@ bool MCP79410::setAlarm(const MCP79410Time &time, bool polarity, int alarmNum) {
 	if (getOscillatorRunning()) {
 		uint8_t buf[6];
 
+		// Clear any existing alarm interrupt, otherwise this one will not fire. Fixed in 0.0.2.
+		clearInterrupt(alarmNum);
+
 		// log.trace("setAlarm %s polarity=%d alarmNum=%d", time.toStringRaw().c_str(), polarity, alarmNum);
 
 		buf[0] = time.rawSecond;
