@@ -196,4 +196,10 @@ void loop() {
 }
 ```
 
+## Version History
+
+### 0.0.3 (2019-05-05)
+
+- Fixed a bug in polarity=false where the bit would not get cleared once set
+
 

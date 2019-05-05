@@ -453,6 +453,9 @@ bool MCP79410::setRTCTime(time_t unixTime) {
 	if (batteryEnable) {
 		time.rawDayOfWeek |= REG_RTCWKDAY_VBATEN;
 	}
+	else {
+		time.rawDayOfWeek &= ~REG_RTCWKDAY_VBATEN;
+	}
 
 	return deviceWriteRTCTime(REG_DATE_TIME, time) == 0;
 }
@@ -560,6 +563,9 @@ bool MCP79410::setAlarm(const MCP79410Time &time, bool polarity, int alarmNum) {
 		if (polarity) {
 			// REG_ALARM_WKDAY_ALMPOL: 1 = alarm triggered, 0 = alarm did not trigger
 			buf[3] |= REG_ALARM_WKDAY_ALMPOL;
+		}
+		else {
+			buf[3] &= ~REG_ALARM_WKDAY_ALMPOL;
 		}
 		buf[3] |= (time.alarmMode & 0x7) << 4;
 
