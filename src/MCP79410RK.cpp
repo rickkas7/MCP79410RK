@@ -774,7 +774,7 @@ int MCP79410::deviceRead(uint8_t i2cAddr, uint8_t addr, uint8_t *buf, size_t buf
 
 			// log.trace("deviceRead addr=%u count=%u", addr + offset, count);
 
-			count = wire.requestFrom(i2cAddr, (uint8_t) count, (uint8_t) true);
+			count = wire.requestFrom(i2cAddr, count, (uint8_t) true);
 			for(size_t ii = 0; ii < count; ii++) {
 				buf[ii + offset] = wire.read();
 			}

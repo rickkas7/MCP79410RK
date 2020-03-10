@@ -198,6 +198,10 @@ void loop() {
 
 ## Version History
 
+### 0.0.4 (2020-03-10)
+
+- Fix compiler warning for ambiguous requestFrom with 1.5.0-rc.2.
+
 ### 0.0.3 (2019-05-05)
 
 - Fixed a bug in polarity=false where the bit would not get cleared once set

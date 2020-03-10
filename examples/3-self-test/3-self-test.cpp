@@ -13,6 +13,11 @@ SYSTEM_THREAD(ENABLED);
 SerialLogHandler logHandler(LOG_LEVEL_TRACE);
 MCP79410 rtc;
 
+// true = LOW is idle state, HIGH to wake
+// false = HIGH is idle state, LOW to wake. This is opposite of the way D8 works, but is more energy-efficient
+// if you use an external inverter.
+const bool alarmPolarity = false;
+
 void runTimeClassTests();
 
 const unsigned long testPeriodMs = 10000;
@@ -95,7 +100,7 @@ void loop() {
 	case ALARM_FROM_NOW_START_STATE:
 		rtc.clearAlarm(curAlarm);
 		assertEqual((int)digitalRead(D8), 0, "%d");
-		bResult = rtc.setAlarm(3, true, curAlarm);
+		bResult = rtc.setAlarm(3, alarmPolarity, curAlarm);
 		stateTime = millis();
 		state = ALARM_FROM_NOW_WAIT_STATE;
 		break;
@@ -127,7 +132,7 @@ void loop() {
 
 		t.clear();
 		t.setAlarmSecond(sec);
-		bResult = rtc.setAlarm(t, true, curAlarm);
+		bResult = rtc.setAlarm(t, alarmPolarity, curAlarm);
 		stateTime = millis();
 		state = ALARM_SEC_WAIT_STATE;
 		break;
@@ -208,7 +213,7 @@ void loop() {
 
 		t.clear();
 		t.setAlarmMinute(30);
-		bResult = rtc.setAlarm(t, true, curAlarm);
+		bResult = rtc.setAlarm(t, alarmPolarity, curAlarm);
 		stateTime = millis();
 		state = ALARM_MIN_WAIT_STATE;
 		break;
@@ -245,7 +250,7 @@ void loop() {
 
 		t.clear();
 		t.setAlarmHour(4);
-		bResult = rtc.setAlarm(t, true, curAlarm);
+		bResult = rtc.setAlarm(t, alarmPolarity, curAlarm);
 		stateTime = millis();
 		state = ALARM_HOUR_WAIT_STATE;
 		break;
@@ -286,7 +291,7 @@ void loop() {
 
 		t.clear();
 		t.setAlarmDayOfWeek(4);
-		bResult = rtc.setAlarm(t, true, curAlarm);
+		bResult = rtc.setAlarm(t, alarmPolarity, curAlarm);
 		stateTime = millis();
 		state = ALARM_DAYOFWEEK_WAIT_STATE;
 		break;
@@ -328,7 +333,7 @@ void loop() {
 
 		t.clear();
 		t.setAlarmDayOfMonth(28);
-		bResult = rtc.setAlarm(t, true, curAlarm);
+		bResult = rtc.setAlarm(t, alarmPolarity, curAlarm);
 		stateTime = millis();
 		state = ALARM_DAYOFMONTH_WAIT_STATE;
 		break;
